@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="form-container">
+    <h1>Edit Region Details</h1>
+    <form action="/edit_region/{{ index }}" method="POST">
+        <div class="field">
+            <label>Region Name</label>
+            <input type="text" name="region_name" value="{{ region_name }}" required>
+        </div>
+        <button type="submit" class="btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

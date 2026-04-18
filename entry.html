@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Data Capture</h1>
+<div class="form-container">
+    <form action="/entry" method="POST">
+        <div class="field">
+            <label>Full Name</label>
+            <input type="text" name="full_name" placeholder="Enter Full Name" required>
+        </div>
+        <div class="input-row">
+            <div class="field flex-1">
+                <label>Age</label>
+                <input type="number" name="age" required>
+            </div>
+            <div class="field flex-1">
+                <label>Sex</label>
+                <select name="sex">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <label>Region (County of Kenya)</label>
+            <select name="region" required>
+                <option value="" disabled selected>Select a County</option>
+                {% for county in counties %}
+                <option value="{{ county }}">{{ county }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top: 20px;">SUBMIT RECORD</button>
+    </form>
+</div>
+{% endblock %}

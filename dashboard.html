@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KNBS Processing System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body class="dashboard-view">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h2 class="mint">KNBS CENSUS</h2>
+            <div class="rate-wide">
+                <p>BIRTH RATE: <span class="mint">+2.3%</span></p>
+                <p>DEATH RATE: <span class="mint">-0.8%</span></p>
+            </div>
+        </div>
+        <nav>
+            <a href="#" class="nav-link"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+            <a href="#" class="nav-link active"><span class="material-symbols-outlined">add</span> Data Capture</a>
+            <a href="#records" class="nav-link"><span class="material-symbols-outlined">list_alt</span> My Records</a>
+            <a href="/logout" class="nav-link"><span class="material-symbols-outlined">logout</span> Log Out</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section class="form-card">
+            <h3>Data Entry (Form S1)</h3>
+            <form action="/submit_census" method="POST" class="census-grid">
+                <input type="text" name="full_name" placeholder="Full Name" required>
+                <input type="number" name="age" placeholder="Age" required>
+                <select name="gender"><option>Male</option><option>Female</option></select>
+                <select name="county">
+                    {% for c in counties %}<option>{{ c }}</option>{% endfor %}
+                </select>
+                <input type="text" name="relationship" placeholder="Relationship to Head">
+                <input type="text" name="education" placeholder="Education Level">
+                <input type="text" name="occupation" placeholder="Occupation">
+                <select name="marital_status"><option>Single</option><option>Married</option></select>
+                <select name="disability"><option>None</option><option>Physical</option></select>
+                <select name="vital_status"><option>Alive</option><option>Deceased</option></select>
+                <button type="submit" class="btn-primary full-span">SAVE TO DATABASE</button>
+            </form>
+        </section>
+
+        <section id="records" class="form-card">
+            <h3>Review Submissions</h3>
+            <table class="data-table">
+                <thead><tr><th>Name</th><th>County</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for row in records %}
+                    <tr>
+                        <td>{{ row['full_name'] }}</td>
+                        <td>{{ row['county'] }}</td>
+                        <td><span class="status-pending">{{ row['status'] }}</span></td>
+                        <td><button class="btn-review">Review</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="records-container">
+    <h2>Census Records Database</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.full_name }}</td>
+                <td>{{ record.age }}</td>
+                <td>{{ record.sex }}</td>
+                <td>
+                    <a href="/edit/{{ record.id }}" class="btn-edit">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+:root {
+    --bg: #05070a;
+    --card: #0e1217;
+    --mint: #10b981;
+    --border: #1e293b;
+    --text-muted: #94a3b8;
+}
+
+body { background: var(--bg); color: white; margin: 0; font-family: 'Inter', sans-serif; display: flex; }
+
+/* Sidebar matches Image 8 */
+.sidebar { width: 260px; height: 100vh; background: #0b0e14; border-right: 1px solid var(--border); padding: 25px; }
+.nav-btn { width: 100%; padding: 12px; background: transparent; border: none; color: var(--text-muted); display: flex; align-items: center; cursor: pointer; border-radius: 8px; margin-bottom: 5px; }
+.nav-btn.active { background: rgba(16, 185, 129, 0.1); color: var(--mint); }
+.nav-btn span { margin-right: 12px; font-size: 20px; }
+
+/* Stats cards match Image 7 */
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+.stat-card { background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; gap: 15px; }
+
+/* Split layout for Capture & My Records */
+.split-layout { display: flex; gap: 20px; margin-top: 20px; }
+.side-panel { flex: 1; background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); max-height: 70vh; overflow-y: auto; }
+.main-panel { flex: 2; }
+
+/* Form Elements */
+.card { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid var(--border); }
+.input-row { display: flex; gap: 15px; margin-bottom: 15px; }
+input, select { background: #000; border: 1px solid var(--border); color: white; padding: 12px; border-radius: 8px; width: 100%; }
+.btn-mint { background: var(--mint); color: #000; font-weight: bold; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; }
+
+/* Regions Grid */
+.county-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.county-pill { background: #000; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; text-align: center; }
+
+/* Login Elements */
+.login-view { height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; }
+.login-card { background: var(--card); width: 350px; padding: 40px; border-radius: 20px; border: 1px solid var(--border); text-align: center; }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KNBS Census System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body class="dashboard-body">
+    <aside class="sidebar">
+        <div class="brand">
+            <h2 class="mint">KNBS CENSUS</h2>
+            <p class="tagline">PROCESSING SYSTEM</p>
+        </div>
+        <nav>
+            <button onclick="showView('dash')" class="nav-btn active" id="btn-dash">
+                <span class="material-symbols-outlined">dashboard</span> Dashboard
+            </button>
+            <button onclick="showView('capture')" class="nav-btn" id="btn-capture">
+                <span class="material-symbols-outlined">add</span> Data Capture
+            </button>
+            <button onclick="showView('submissions')" class="nav-btn" id="btn-submissions">
+                <span class="material-symbols-outlined">fact_check</span> Submissions Table
+            </button>
+            <button onclick="showView('regions')" class="nav-btn" id="btn-regions">
+                <span class="material-symbols-outlined">public</span> Manage Regions
+            </button>
+            <button onclick="window.location.href='/export_excel'" class="nav-btn">
+                <span class="material-symbols-outlined">analytics</span> Analytics (Excel)
+            </button>
+            <hr class="divider">
+            <a href="/logout" class="nav-btn logout-link">
+                <span class="material-symbols-outlined">logout</span> Log Out
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div id="view-dash" class="page">
+            <header class="header">
+                <h1>Welcome back, {{ user }}</h1>
+                <button class="btn-mint" onclick="showView('capture')">+ New Field Entry</button>
+            </header>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="material-symbols-outlined icon-blue">groups</span>
+                    <div><p>TOTAL RECORDS</p><h3>{{ records|length }}</h3></div>
+                </div>
+                <div class="stat-card">
+                    <span class="material-symbols-outlined icon-orange">hourglass_empty</span>
+                    <div><p>PENDING REVIEW</p><h3>0</h3></div>
+                </div>
+                <div class="stat-card">
+                    <span class="material-symbols-outlined icon-green">check_circle</span>
+                    <div><p>APPROVED</p><h3>{{ records|length }}</h3></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-capture" class="page" style="display:none;">
+            <header class="header">
+                <h1>Data Entry (Form S1)</h1>
+                <p>Add new individual particulars to the census database</p>
+            </header>
+            <div class="split-layout">
+                <div class="side-panel">
+                    <h3>My Records</h3>
+                    <table class="mini-table">
+                        {% for row in records %}
+                        <tr><td>{{ row['name'] }}</td><td><span class="tag-approved">Saved</span></td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="main-panel card">
+                    <h3>Individual Particulars</h3>
+                    <form action="/submit" method="POST" class="census-form">
+                        <div class="input-row">
+                            <input type="text" name="name" placeholder="Full Name (e.g. James Kamau)" required>
+                            <input type="number" name="age" placeholder="Age">
+                        </div>
+                        <div class="input-row">
+                            <select name="relationship"><option>Select relationship</option><option>Head</option></select>
+                            <select name="sex"><option>Select sex</option><option>Male</option><option>Female</option></select>
+                        </div>
+                        <select name="vital" style="width: 100%;"><option>Alive</option><option>Deceased</option></select>
+                        <button type="submit" class="btn-mint full-btn">Save to SQL Database</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-regions" class="page" style="display:none;">
+            <header class="header"><h1>Administrative Regions</h1></header>
+            <div class="county-grid">
+                {% for county in counties %}
+                <div class="county-pill">{{ county }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showView(id) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('view-' + id).style.display = 'block';
+            document.getElementById('btn-' + id).classList.add('active');
+        }
+    </script>
+</body>
+</html>

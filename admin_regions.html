@@ -1,0 +1,33 @@
+{% extends "app_layout.html" %}
+{% block content %}
+<main class="main-content">
+    <h1>Region Management</h1>
+    <div class="form-container">
+        <h3>Add New Region</h3>
+        <form action="/admin/regions" method="POST" class="input-row">
+            <input type="text" name="region_name" placeholder="e.g. Nairobi, Kiambu, Mombasa" required>
+            <button type="submit" class="btn-primary">Add Region</button>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h3>Existing Regions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Region Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for region in regions %}
+                <tr>
+                    <td>{{ region }}</td>
+                    <td><a href="#" class="text-red">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

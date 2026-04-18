@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KNBS Census System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-area" style="margin-bottom: 40px;">
+            <h2 class="mint"><i class="fas fa-chart-pie"></i> KNBS</h2>
+            <p class="small">CENSUS SYSTEM</p>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}" class="nav-link">
+                <i class="fas fa-home nav-icon"></i> Dashboard
+            </a>
+            <a href="{{ url_for('entry') }}" class="nav-link">
+                <i class="fas fa-edit nav-icon"></i> Data Capture
+            </a>
+            <a href="{{ url_for('admin_users') }}" class="nav-link">
+                <i class="fas fa-users nav-icon"></i> Admin Users
+            </a>
+            <a href="{{ url_for('admin_regions') }}" class="nav-link">
+                <i class="fas fa-map-marker-alt nav-icon"></i> Regions
+            </a>
+            <a href="{{ url_for('logout') }}" class="nav-link logout" style="margin-top: 50px; color: #ef4444;">
+                <i class="fas fa-sign-out-alt nav-icon"></i> Log Out
+            </a>
+        </nav>
+    </aside>
+    <main class="main-content" style="margin-left: 260px; padding: 40px;">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "app_layout.html" %}
+{% block content %}
+<main class="main-content">
+    <h1>System Users</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td><span class="badge">{{ user.role }}</span></td>
+                    <td>Active</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn-primary" style="margin-top: 20px;">+ Create New User</button>
+    </div>
+</main>
+{% endblock %}
